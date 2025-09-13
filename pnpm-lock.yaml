@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      dom-outline:
+        specifier: ^2.1.7
+        version: 2.1.7
       plasmo:
         specifier: 0.90.5
         version: 0.90.5(@swc/core@1.13.5(@swc/helpers@0.5.17))(@swc/helpers@0.5.17)(@types/node@20.11.5)(postcss@8.5.6)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1855,6 +1858,9 @@ packages:
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
+
+  dom-outline@2.1.7:
+    resolution: {integrity: sha512-K7qgSDBNra47D0KlxnBgBu32wyeQGcMLuQIxQeObMchic1rUj8B8Su2zn9x9WpTcQn1X5OWtp14WMrI5ryYLBA==}
 
   dom-serializer@1.4.1:
     resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
@@ -5123,6 +5129,8 @@ snapshots:
   dir-glob@3.0.1:
     dependencies:
       path-type: 4.0.0
+
+  dom-outline@2.1.7: {}
 
   dom-serializer@1.4.1:
     dependencies:
