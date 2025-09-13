@@ -32,8 +32,66 @@ function IndexPopup() {
 
     chrome.runtime.onMessage.addListener(handleMessage)
     
+    // 监听storage变化
+    const handleStorageChange = (changes: any, namespace: string) => {
+      if (namespace === 'local' && changes.lastPickedElement) {
+        setPickedElement(changes.lastPickedElement.newValue)
+        setIsPicking(false)
+      }
+    }
+    
+    chrome.storage.onChanged.addListener(handleStorageChange)
+    
+    // 检查storage中是否有新的拾取元素
+    const checkStorage = async () => {
+      try {
+        const result = await chrome.storage.local.get(['lastPickedElement', 'pickedAt'])
+        if (result.lastPickedElement && result.pickedAt) {
+          // 检查是否是最近10秒内拾取的元素
+          const now = Date.now()
+          if (now - result.pickedAt < 10000) {
+            setPickedElement(result.lastPickedElement)
+            setIsPicking(false)
+          }
+        }
+      } catch (error) {
+        console.error("读取storage失败:", error)
+      }
+    }
+    
+    checkStorage()
+    
+    // 清除badge和通知
+    const clearIndicators = async () => {
+      try {
+        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+        if (tab.id) {
+          chrome.action.setBadgeText({
+            text: "",
+            tabId: tab.id
+          })
+        }
+        
+        // 清除所有相关通知
+        chrome.notifications.getAll((notifications) => {
+          if (notifications) {
+            Object.keys(notifications).forEach(notificationId => {
+              if (notificationId.startsWith('element-picked-')) {
+                chrome.notifications.clear(notificationId)
+              }
+            })
+          }
+        })
+      } catch (error) {
+        console.error("清除指示器失败:", error)
+      }
+    }
+    
+    clearIndicators()
+    
     return () => {
       chrome.runtime.onMessage.removeListener(handleMessage)
+      chrome.storage.onChanged.removeListener(handleStorageChange)
     }
   }, [])
 
@@ -48,6 +106,11 @@ function IndexPopup() {
         await chrome.tabs.sendMessage(tab.id, { type: "START_PICKING" })
         setIsPicking(true)
         setPickedElement(null)
+        
+        // 延迟关闭popup，确保消息发送成功
+        setTimeout(() => {
+          window.close()
+        }, 100)
       }
     } catch (error) {
       console.error("开始拾取元素失败:", error)
@@ -114,7 +177,7 @@ function IndexPopup() {
             }
           }}
         >
-          {isPicking ? "🛑 停止拾取" : "🎯 开始拾取元素"}
+          {isPicking ? "🛑 停止拾取" : "🎯 开始拾取元素 (将关闭此窗口)"}
         </button>
       </div>
 
@@ -130,7 +193,9 @@ function IndexPopup() {
         }}>
           <strong>🎯 拾取模式已激活</strong><br />
           将鼠标悬停在页面上要拾取的元素上，元素会被高亮显示。点击元素完成拾取。<br />
-          <em>💡 按ESC键可取消拾取模式</em>
+          <em>💡 按ESC键可取消拾取模式</em><br />
+          <em>📋 点击"开始拾取元素"后此窗口会自动关闭，方便页面操作</em><br />
+          <em>🔔 拾取完成后会收到系统通知，点击扩展图标查看详细结果</em>
         </div>
       )}
 
