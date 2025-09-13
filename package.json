@@ -10,7 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "dom-outline": "^2.1.7",
+    "dom-outline": "^2.1.8",
     "plasmo": "0.90.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"

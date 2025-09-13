@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react"
 
+interface ElementSelectors {
+  css: string
+  xpath: string
+  tagClass: string | null
+  attribute: string | null
+}
+
 interface ElementInfo {
   tagName: string
   id: string | null
   className: string | null
   textContent: string | null
-  selector: string
+  selectors: ElementSelectors
   attributes: Record<string, string>
 }
 
@@ -194,46 +201,93 @@ function IndexPopup() {
               </div>
             )}
             
-            <div style={{ marginBottom: 8 }}>
-              <strong style={{ color: "#6c757d" }}>CSS选择器:</strong>
+            <div style={{ marginBottom: 12 }}>
+              <strong style={{ color: "#6c757d" }}>选择器:</strong>
             </div>
-            <code style={{ 
-              backgroundColor: "#e9ecef", 
-              padding: "8px", 
-              borderRadius: 4,
-              display: "block",
-              fontSize: 11,
-              color: "#495057",
-              wordBreak: "break-all",
-              border: "1px solid #ced4da"
-            }}>
-              {pickedElement.selector}
-            </code>
+            
+            {/* CSS选择器 */}
+            <div style={{ marginBottom: 12 }}>
+              <div style={{ fontSize: 11, color: "#6c757d", marginBottom: 4 }}>
+                <strong>CSS选择器:</strong>
+              </div>
+              <code style={{ 
+                backgroundColor: "#e9ecef", 
+                padding: "8px", 
+                borderRadius: 4,
+                display: "block",
+                fontSize: 11,
+                color: "#495057",
+                wordBreak: "break-all",
+                border: "1px solid #ced4da",
+                fontFamily: "Monaco, Consolas, 'Courier New', monospace"
+              }}>
+                {pickedElement.selectors.css}
+              </code>
+            </div>
+            
+            {/* XPath选择器 */}
+            <div style={{ marginBottom: 12 }}>
+              <div style={{ fontSize: 11, color: "#6c757d", marginBottom: 4 }}>
+                <strong>XPath选择器:</strong>
+              </div>
+              <code style={{ 
+                backgroundColor: "#fff3cd", 
+                padding: "8px", 
+                borderRadius: 4,
+                display: "block",
+                fontSize: 11,
+                color: "#856404",
+                wordBreak: "break-all",
+                border: "1px solid #ffeaa7",
+                fontFamily: "Monaco, Consolas, 'Courier New', monospace"
+              }}>
+                {pickedElement.selectors.xpath}
+              </code>
+            </div>
+            
+            {/* 其他选择器格式 */}
+            {(pickedElement.selectors.tagClass || pickedElement.selectors.attribute) && (
+              <div style={{ marginBottom: 12 }}>
+                <div style={{ fontSize: 11, color: "#6c757d", marginBottom: 4 }}>
+                  <strong>其他格式:</strong>
+                </div>
+                {pickedElement.selectors.tagClass && (
+                  <div style={{ marginBottom: 4 }}>
+                    <span style={{ fontSize: 10, color: "#6c757d" }}>标签+类名:</span>
+                    <code style={{ 
+                      backgroundColor: "#f8f9fa", 
+                      padding: "4px 6px", 
+                      borderRadius: 3,
+                      fontSize: 10,
+                      color: "#495057",
+                      marginLeft: 6,
+                      fontFamily: "Monaco, Consolas, 'Courier New', monospace"
+                    }}>
+                      {pickedElement.selectors.tagClass}
+                    </code>
+                  </div>
+                )}
+                {pickedElement.selectors.attribute && (
+                  <div>
+                    <span style={{ fontSize: 10, color: "#6c757d" }}>属性选择器:</span>
+                    <code style={{ 
+                      backgroundColor: "#f8f9fa", 
+                      padding: "4px 6px", 
+                      borderRadius: 3,
+                      fontSize: 10,
+                      color: "#495057",
+                      marginLeft: 6,
+                      fontFamily: "Monaco, Consolas, 'Courier New', monospace"
+                    }}>
+                      {pickedElement.selectors.attribute}
+                    </code>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
-
-      <div style={{ 
-        fontSize: 11, 
-        color: "#6c757d", 
-        textAlign: "center",
-        marginTop: 16,
-        paddingTop: 12,
-        borderTop: "1px solid #dee2e6"
-      }}>
-        <div style={{ marginBottom: 4 }}>
-          <a href="https://github.com/ZoeLeee/DomOutline" target="_blank" style={{ color: "#007bff", textDecoration: "none" }}>
-            📚 DomOutline 库
-          </a>
-          {" • "}
-          <a href="https://docs.plasmo.com" target="_blank" style={{ color: "#007bff", textDecoration: "none" }}>
-            Plasmo 文档
-          </a>
-        </div>
-        <div style={{ fontSize: 10 }}>
-          基于 DomOutline 构建的元素拾取器
-        </div>
-      </div>
     </div>
   )
 }
