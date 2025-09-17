@@ -62,7 +62,7 @@ function IndexPopup() {
         }
       }
     } catch (error) {
-      console.error("删除元素失败:", error)
+      console.error(chrome.i18n.getMessage("deleteElementFailed"), error)
     }
   }
 
@@ -120,7 +120,7 @@ function IndexPopup() {
         }
       }
     } catch (error) {
-      console.error("切换元素可见性失败:", error)
+      console.error(chrome.i18n.getMessage("toggleVisibilityFailed"), error)
     }
   }
 
@@ -196,7 +196,7 @@ function IndexPopup() {
         setPickedElements(currentPageElements)
         
       } catch (error) {
-        console.error("读取storage失败:", error)
+        console.error(chrome.i18n.getMessage("readStorageFailed"), error)
       }
     }
     
@@ -224,7 +224,7 @@ function IndexPopup() {
           }
         })
       } catch (error) {
-        console.error("清除指示器失败:", error)
+        console.error(chrome.i18n.getMessage("clearIndicatorsFailed"), error)
       }
     }
     
@@ -253,8 +253,8 @@ function IndexPopup() {
         }, 100)
       }
     } catch (error) {
-      console.error("开始拾取元素失败:", error)
-      alert("无法在当前页面拾取元素，请确保页面已加载完成")
+      console.error(chrome.i18n.getMessage("startPickingFailed"), error)
+      alert(chrome.i18n.getMessage("startPickingFailed"))
     }
   }
 
@@ -267,7 +267,7 @@ function IndexPopup() {
         await chrome.tabs.sendMessage(tab.id, { type: "STOP_PICKING" })
       }
     } catch (error) {
-      console.error("停止拾取元素失败:", error)
+      console.error(chrome.i18n.getMessage("stopPickingFailed"), error)
     } finally {
       setIsPicking(false)
     }
@@ -281,7 +281,7 @@ function IndexPopup() {
         minHeight: 200
       }}>
       <h4>
-        DOM Blocker
+        {chrome.i18n.getMessage("popupTitle")}
       </h4>
       
       <div style={{ marginBottom: 16 }}>
@@ -314,7 +314,7 @@ function IndexPopup() {
             }
           }}
         >
-          {isPicking ? "🛑 停止拾取" : "🎯 开始拾取元素 (将关闭此窗口)"}
+          {isPicking ? chrome.i18n.getMessage("stopPicking") : chrome.i18n.getMessage("startPicking")}
         </button>
       </div>
 
@@ -328,12 +328,12 @@ function IndexPopup() {
           fontSize: 12,
           color: "#155724"
         }}>
-          <strong>🎯 拾取模式已激活</strong><br />
-          将鼠标悬停在页面上要拾取的元素上，元素会被高亮显示。点击元素完成拾取。<br />
-          <em>💡 按ESC键可取消拾取模式</em><br />
-          <em>📋 点击"开始拾取元素"后此窗口会自动关闭，方便页面操作</em><br />
-          <em>👁️ 拾取的元素将自动隐藏，可在列表中切换显示状态</em><br />
-          <em>🔔 拾取完成后会收到系统通知，点击扩展图标查看详细结果</em>
+          <strong>{chrome.i18n.getMessage("pickingModeActive")}</strong><br />
+          {chrome.i18n.getMessage("pickingInstructions")}<br />
+          <em>{chrome.i18n.getMessage("pickingTip1")}</em><br />
+          <em>{chrome.i18n.getMessage("pickingTip2")}</em><br />
+          <em>{chrome.i18n.getMessage("pickingTip3")}</em><br />
+          <em>{chrome.i18n.getMessage("pickingTip4")}</em>
         </div>
       )}
 
@@ -346,7 +346,7 @@ function IndexPopup() {
         marginBottom: 16
       }}>
         <h3 style={{ margin: "0 0 12px 0", fontSize: 16, color: "#495057" }}>
-          📋 当前页面拾取的元素 ({pickedElements.length})
+          {chrome.i18n.getMessage("currentPageElements")} ({pickedElements.length})
         </h3>
         
         {pickedElements.length > 0 ? (
@@ -380,7 +380,7 @@ function IndexPopup() {
                         color: item.element.isHidden ? "#dc3545" : "#28a745",
                         fontWeight: "bold"
                       }}>
-                        {item.element.isHidden ? "已隐藏" : "可见"}
+                        {item.element.isHidden ? chrome.i18n.getMessage("hidden") : chrome.i18n.getMessage("visible")}
                       </span>
                     </div>
                     {item.element.textContent && (
@@ -403,9 +403,9 @@ function IndexPopup() {
                         fontSize: 10,
                         fontWeight: "bold"
                       }}
-                      title={item.element.isHidden ? "显示元素" : "隐藏元素"}
+                      title={item.element.isHidden ? chrome.i18n.getMessage("showElement") : chrome.i18n.getMessage("hideElement")}
                     >
-                      {item.element.isHidden ? "显示" : "隐藏"}
+                      {item.element.isHidden ? chrome.i18n.getMessage("show") : chrome.i18n.getMessage("hide")}
                     </button>
                     <button
                       onClick={() => deleteElement(item.element, index)}
@@ -419,9 +419,9 @@ function IndexPopup() {
                         fontSize: 10,
                         fontWeight: "bold"
                       }}
-                      title="删除元素"
+                      title={chrome.i18n.getMessage("deleteElement")}
                     >
-                      删除
+                      {chrome.i18n.getMessage("delete")}
                     </button>
                   </div>
                 </div>
@@ -438,11 +438,10 @@ function IndexPopup() {
               🎯
             </div>
             <div style={{ fontSize: 16, fontWeight: "bold", marginBottom: 8 }}>
-              还没有拾取任何元素
+              {chrome.i18n.getMessage("noElementsPicked")}
             </div>
             <div style={{ fontSize: 12, lineHeight: 1.5 }}>
-              点击"开始拾取元素"按钮<br />
-              在页面上选择要隐藏的元素
+              {chrome.i18n.getMessage("noElementsInstructions")}
             </div>
           </div>
         )}

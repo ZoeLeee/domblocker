@@ -1,0 +1,146 @@
+{
+  "extensionName": {
+    "message": "DOM Blocker",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "A powerful tool to block and hide unwanted DOM elements on web pages.",
+    "description": "Description of the extension."
+  },
+  "popupTitle": {
+    "message": "DOM Blocker",
+    "description": "Popup title."
+  },
+  "startPicking": {
+    "message": "🎯 Start Picking Elements (will close this window)",
+    "description": "Start picking elements button text."
+  },
+  "stopPicking": {
+    "message": "🛑 Stop Picking",
+    "description": "Stop picking elements button text."
+  },
+  "pickingModeActive": {
+    "message": "🎯 Picking mode activated",
+    "description": "Picking mode active message."
+  },
+  "pickingInstructions": {
+    "message": "Hover over elements on the page to pick them. Elements will be highlighted. Click to complete picking.",
+    "description": "Picking instructions."
+  },
+  "pickingTip1": {
+    "message": "💡 Press ESC key to cancel picking mode",
+    "description": "Picking tip 1."
+  },
+  "pickingTip2": {
+    "message": "📋 This window will auto-close after clicking 'Start Picking Elements' for easier page operation",
+    "description": "Picking tip 2."
+  },
+  "pickingTip3": {
+    "message": "👁️ Picked elements will be automatically hidden, you can toggle visibility in the list",
+    "description": "Picking tip 3."
+  },
+  "pickingTip4": {
+    "message": "🔔 You'll receive a system notification when picking is complete, click the extension icon to view details",
+    "description": "Picking tip 4."
+  },
+  "currentPageElements": {
+    "message": "📋 Elements picked on current page",
+    "description": "Current page elements title."
+  },
+  "noElementsPicked": {
+    "message": "No elements picked yet",
+    "description": "No elements picked message."
+  },
+  "noElementsInstructions": {
+    "message": "Click 'Start Picking Elements' button to select elements to hide on the page",
+    "description": "No elements instructions."
+  },
+  "visible": {
+    "message": "Visible",
+    "description": "Element visible status."
+  },
+  "hidden": {
+    "message": "Hidden",
+    "description": "Element hidden status."
+  },
+  "show": {
+    "message": "Show",
+    "description": "Show element button."
+  },
+  "hide": {
+    "message": "Hide",
+    "description": "Hide element button."
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete element button."
+  },
+  "showElement": {
+    "message": "Show element",
+    "description": "Show element tooltip."
+  },
+  "hideElement": {
+    "message": "Hide element",
+    "description": "Hide element tooltip."
+  },
+  "deleteElement": {
+    "message": "Delete element",
+    "description": "Delete element tooltip."
+  },
+  "elementPickedNotification": {
+    "message": "Element picked successfully",
+    "description": "Element picked notification title."
+  },
+  "elementPickedMessage": {
+    "message": "Click the extension icon to view picked element details",
+    "description": "Element picked notification message."
+  },
+  "viewResults": {
+    "message": "View Results",
+    "description": "View results button text."
+  },
+  "deleteElementFailed": {
+    "message": "Failed to delete element",
+    "description": "Delete element error message."
+  },
+  "toggleVisibilityFailed": {
+    "message": "Failed to toggle element visibility",
+    "description": "Toggle visibility error message."
+  },
+  "startPickingFailed": {
+    "message": "Unable to pick elements on current page, please ensure the page is fully loaded",
+    "description": "Start picking error message."
+  },
+  "stopPickingFailed": {
+    "message": "Failed to stop picking elements",
+    "description": "Stop picking error message."
+  },
+  "clearIndicatorsFailed": {
+    "message": "Failed to clear indicators",
+    "description": "Clear indicators error message."
+  },
+  "readStorageFailed": {
+    "message": "Failed to read storage",
+    "description": "Read storage error message."
+  },
+  "saveStorageFailed": {
+    "message": "Failed to save to storage",
+    "description": "Save storage error message."
+  },
+  "restoreElementStatesFailed": {
+    "message": "Failed to restore element states",
+    "description": "Restore element states error message."
+  },
+  "toggleElementVisibilityFailed": {
+    "message": "Failed to toggle element visibility",
+    "description": "Toggle element visibility error message."
+  },
+  "showNotificationFailed": {
+    "message": "Failed to show notification",
+    "description": "Show notification error message."
+  },
+  "elementNotFound": {
+    "message": "Element selector not found after maximum retries",
+    "description": "Element not found warning message."
+  }
+}

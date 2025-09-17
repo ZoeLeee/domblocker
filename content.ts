@@ -198,7 +198,7 @@ function startPicking() {
           }
         })
         .catch((error) => {
-          console.error("保存到storage失败:", error)
+          console.error(chrome.i18n.getMessage("saveStorageFailed"), error)
         })
     },
     keydown: (target, event) => {
@@ -235,7 +235,7 @@ function toggleElementVisibility(selector: string, isHidden: boolean) {
     })
     return elements.length > 0
   } catch (error) {
-    console.error('切换元素可见性失败:', error)
+    console.error(chrome.i18n.getMessage('toggleElementVisibilityFailed'), error)
     return false
   }
 }
@@ -258,7 +258,7 @@ async function restoreElementStates() {
       }
     }
   } catch (error) {
-    console.error('恢复元素状态失败:', error)
+    console.error(chrome.i18n.getMessage('restoreElementStatesFailed'), error)
   }
 }
 
@@ -278,7 +278,7 @@ function retryHideElement(selector: string, retryCount: number) {
       retryHideElement(selector, retryCount + 1)
     }, retryDelay)
   } else {
-    console.warn(`元素选择器 ${selector} 在 ${maxRetries} 次重试后仍未找到`)
+    console.warn(chrome.i18n.getMessage('elementNotFound') + `: ${selector}`)
   }
 }
 

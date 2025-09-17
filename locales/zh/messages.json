@@ -1,0 +1,146 @@
+{
+  "extensionName": {
+    "message": "DOM 元素拦截器",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "一个强大的工具，用于拦截和隐藏网页上不需要的DOM元素。",
+    "description": "Description of the extension."
+  },
+  "popupTitle": {
+    "message": "DOM 元素拦截器",
+    "description": "Popup title."
+  },
+  "startPicking": {
+    "message": "🎯 开始拾取元素 (将关闭此窗口)",
+    "description": "Start picking elements button text."
+  },
+  "stopPicking": {
+    "message": "🛑 停止拾取",
+    "description": "Stop picking elements button text."
+  },
+  "pickingModeActive": {
+    "message": "🎯 拾取模式已激活",
+    "description": "Picking mode active message."
+  },
+  "pickingInstructions": {
+    "message": "将鼠标悬停在页面上要拾取的元素上，元素会被高亮显示。点击元素完成拾取。",
+    "description": "Picking instructions."
+  },
+  "pickingTip1": {
+    "message": "💡 按ESC键可取消拾取模式",
+    "description": "Picking tip 1."
+  },
+  "pickingTip2": {
+    "message": "📋 点击\"开始拾取元素\"后此窗口会自动关闭，方便页面操作",
+    "description": "Picking tip 2."
+  },
+  "pickingTip3": {
+    "message": "👁️ 拾取的元素将自动隐藏，可在列表中切换显示状态",
+    "description": "Picking tip 3."
+  },
+  "pickingTip4": {
+    "message": "🔔 拾取完成后会收到系统通知，点击扩展图标查看详细结果",
+    "description": "Picking tip 4."
+  },
+  "currentPageElements": {
+    "message": "📋 当前页面拾取的元素",
+    "description": "Current page elements title."
+  },
+  "noElementsPicked": {
+    "message": "还没有拾取任何元素",
+    "description": "No elements picked message."
+  },
+  "noElementsInstructions": {
+    "message": "点击\"开始拾取元素\"按钮在页面上选择要隐藏的元素",
+    "description": "No elements instructions."
+  },
+  "visible": {
+    "message": "可见",
+    "description": "Element visible status."
+  },
+  "hidden": {
+    "message": "已隐藏",
+    "description": "Element hidden status."
+  },
+  "show": {
+    "message": "显示",
+    "description": "Show element button."
+  },
+  "hide": {
+    "message": "隐藏",
+    "description": "Hide element button."
+  },
+  "delete": {
+    "message": "删除",
+    "description": "Delete element button."
+  },
+  "showElement": {
+    "message": "显示元素",
+    "description": "Show element tooltip."
+  },
+  "hideElement": {
+    "message": "隐藏元素",
+    "description": "Hide element tooltip."
+  },
+  "deleteElement": {
+    "message": "删除元素",
+    "description": "Delete element tooltip."
+  },
+  "elementPickedNotification": {
+    "message": "元素拾取完成",
+    "description": "Element picked notification title."
+  },
+  "elementPickedMessage": {
+    "message": "点击扩展图标查看拾取的元素信息",
+    "description": "Element picked notification message."
+  },
+  "viewResults": {
+    "message": "查看结果",
+    "description": "View results button text."
+  },
+  "deleteElementFailed": {
+    "message": "删除元素失败",
+    "description": "Delete element error message."
+  },
+  "toggleVisibilityFailed": {
+    "message": "切换元素可见性失败",
+    "description": "Toggle visibility error message."
+  },
+  "startPickingFailed": {
+    "message": "无法在当前页面拾取元素，请确保页面已加载完成",
+    "description": "Start picking error message."
+  },
+  "stopPickingFailed": {
+    "message": "停止拾取元素失败",
+    "description": "Stop picking error message."
+  },
+  "clearIndicatorsFailed": {
+    "message": "清除指示器失败",
+    "description": "Clear indicators error message."
+  },
+  "readStorageFailed": {
+    "message": "读取storage失败",
+    "description": "Read storage error message."
+  },
+  "saveStorageFailed": {
+    "message": "保存到storage失败",
+    "description": "Save storage error message."
+  },
+  "restoreElementStatesFailed": {
+    "message": "恢复元素状态失败",
+    "description": "Restore element states error message."
+  },
+  "toggleElementVisibilityFailed": {
+    "message": "切换元素可见性失败",
+    "description": "Toggle element visibility error message."
+  },
+  "showNotificationFailed": {
+    "message": "显示通知失败",
+    "description": "Show notification error message."
+  },
+  "elementNotFound": {
+    "message": "元素选择器在最大重试次数后仍未找到",
+    "description": "Element not found warning message."
+  }
+}

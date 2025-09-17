@@ -1,8 +1,8 @@
 {
   "name": "domblocker",
-  "displayName": "Domblocker",
+  "displayName": "__MSG_extensionName__",
   "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "description": "__MSG_extensionDescription__",
   "author": "zoolee1021@163.com",
   "scripts": {
     "dev": "plasmo dev",
@@ -25,6 +25,7 @@
     "typescript": "5.3.3"
   },
   "manifest": {
+    "default_locale": "zh",
     "host_permissions": [
       "https://*/*"
     ],

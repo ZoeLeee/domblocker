@@ -30,11 +30,11 @@ async function showElementPickedNotification(tabId: number) {
     chrome.notifications.create(notificationId, {
       type: 'basic',
       iconUrl: 'assets/icon.png',
-      title: '元素拾取完成',
-      message: '点击扩展图标查看拾取的元素信息',
+      title: chrome.i18n.getMessage('elementPickedNotification'),
+      message: chrome.i18n.getMessage('elementPickedMessage'),
       priority: 1,
       buttons: [
-        { title: '查看结果' }
+        { title: chrome.i18n.getMessage('viewResults') }
       ]
     })
     
@@ -73,10 +73,10 @@ async function showElementPickedNotification(tabId: number) {
       chrome.notifications.clear(notificationId)
     }, 5000)
     
-    console.log("已设置badge和通知提示用户元素拾取完成")
+    console.log(chrome.i18n.getMessage("elementPickedNotification"))
     
   } catch (error) {
-    console.error("显示通知失败:", error)
+    console.error(chrome.i18n.getMessage("showNotificationFailed"), error)
   }
 }
 
