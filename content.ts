@@ -183,16 +183,18 @@ function startPicking() {
       // 立即隐藏拾取的元素
       toggleElementVisibility(selectors.css, true)
 
-      // 保存到storage，使用页面URL作为key
+      // 保存到storage，使用唯一ID作为key
       const pageUrl = window.location.href
-      const storageKey = `pickedElement_${encodeURIComponent(pageUrl)}`
+      const uniqueId = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      const storageKey = `pickedElement_${uniqueId}`
       
       chrome.storage.local
         .set({
           [storageKey]: {
             element: elementInfo,
             pickedAt: Date.now(),
-            pageUrl: pageUrl
+            pageUrl: pageUrl,
+            uniqueId: uniqueId
           }
         })
         .catch((error) => {
@@ -237,6 +239,51 @@ function toggleElementVisibility(selector: string, isHidden: boolean) {
     return false
   }
 }
+
+// 页面加载时恢复元素隐藏状态
+async function restoreElementStates() {
+  try {
+    const pageUrl = window.location.href
+    const allData = await chrome.storage.local.get()
+    console.log("🚀 ~ restoreElementStates ~ allData:", allData)
+    
+    // 查找当前页面的所有拾取元素
+    for (const key in allData) {
+      if (key.startsWith('pickedElement_')) {
+        const data = allData[key]
+        if (data && data.pageUrl === pageUrl && data.element && data.element.isHidden) {
+          // 恢复隐藏状态，使用重试机制处理异步加载的元素
+          retryHideElement(data.element.selectors.css, 0)
+        }
+      }
+    }
+  } catch (error) {
+    console.error('恢复元素状态失败:', error)
+  }
+}
+
+// 重试隐藏元素，处理异步加载的情况
+function retryHideElement(selector: string, retryCount: number) {
+  const maxRetries = 10
+  const retryDelay = 1000 // 1秒
+  
+  const elements = document.querySelectorAll(selector)
+  
+  if (elements.length > 0) {
+    // 找到元素，立即隐藏
+    toggleElementVisibility(selector, true)
+  } else if (retryCount < maxRetries) {
+    // 没找到元素，延迟重试
+    setTimeout(() => {
+      retryHideElement(selector, retryCount + 1)
+    }, retryDelay)
+  } else {
+    console.warn(`元素选择器 ${selector} 在 ${maxRetries} 次重试后仍未找到`)
+  }
+}
+
+// 页面加载完成后恢复元素状态
+window.onload = restoreElementStates
 
 // 监听来自popup的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

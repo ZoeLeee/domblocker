@@ -21,6 +21,7 @@ interface PickedElementData {
   element: ElementInfo
   pickedAt: number
   pageUrl: string
+  uniqueId: string
 }
 
 function IndexPopup() {
@@ -128,10 +129,12 @@ function IndexPopup() {
     const handleMessage = (message: any) => {
       if (message.type === "ELEMENT_PICKED") {
         // 添加新拾取的元素到列表
+        const uniqueId = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
         const newElement: PickedElementData = {
           element: message.element,
           pickedAt: Date.now(),
-          pageUrl: currentPageUrl
+          pageUrl: currentPageUrl,
+          uniqueId: uniqueId
         }
         setPickedElements(prev => [newElement, ...prev])
         setIsPicking(false)
