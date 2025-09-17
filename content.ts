@@ -173,17 +173,27 @@ function startPicking() {
             return acc
           },
           {} as Record<string, string>
-        )
+        ),
+        isHidden: true // 默认隐藏
       }
 
       // 先停止拾取
       stopPicking()
 
-      // 保存到storage
+      // 立即隐藏拾取的元素
+      toggleElementVisibility(selectors.css, true)
+
+      // 保存到storage，使用页面URL作为key
+      const pageUrl = window.location.href
+      const storageKey = `pickedElement_${encodeURIComponent(pageUrl)}`
+      
       chrome.storage.local
         .set({
-          lastPickedElement: elementInfo,
-          pickedAt: Date.now()
+          [storageKey]: {
+            element: elementInfo,
+            pickedAt: Date.now(),
+            pageUrl: pageUrl
+          }
         })
         .catch((error) => {
           console.error("保存到storage失败:", error)
@@ -207,6 +217,27 @@ function stopPicking() {
   theRoom.stop(true) // 重置inspector样式
 }
 
+// 隐藏/显示元素
+function toggleElementVisibility(selector: string, isHidden: boolean) {
+  try {
+    const elements = document.querySelectorAll(selector)
+    elements.forEach(element => {
+      const htmlElement = element as HTMLElement
+      if (isHidden) {
+        htmlElement.style.visibility = 'hidden'
+        htmlElement.style.pointerEvents = 'none'
+      } else {
+        htmlElement.style.visibility = 'visible'
+        htmlElement.style.pointerEvents = 'auto'
+      }
+    })
+    return elements.length > 0
+  } catch (error) {
+    console.error('切换元素可见性失败:', error)
+    return false
+  }
+}
+
 // 监听来自popup的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "START_PICKING") {
@@ -215,6 +246,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.type === "STOP_PICKING") {
     stopPicking()
     sendResponse({ success: true })
+  } else if (message.type === "TOGGLE_ELEMENT_VISIBILITY") {
+    const { selector, isHidden } = message
+    const success = toggleElementVisibility(selector, isHidden)
+    sendResponse({ success })
   }
 
   return true
